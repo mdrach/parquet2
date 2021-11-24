@@ -104,8 +104,8 @@ pub fn int96_to_i64_ns(value: [u32; 3]) -> i64 {
     const SECONDS_PER_DAY: i64 = 86_400;
     const NANOS_PER_SECOND: i64 = 1_000_000_000;
 
-    let day = value[2] as i64;
-    let nanoseconds = ((value[1] as i64) << 32) + value[0] as i64;
+    let day = value[2].swap_bytes() as i64;
+    let nanoseconds = ((value[1].swap_bytes() as i64) << 32) + value[0].swap_bytes() as i64;
     let seconds = (day - JULIAN_DAY_OF_EPOCH) * SECONDS_PER_DAY;
 
     seconds * NANOS_PER_SECOND + nanoseconds
