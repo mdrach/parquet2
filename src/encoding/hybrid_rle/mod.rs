@@ -225,4 +225,15 @@ mod tests {
 
         assert_eq!(result, &[0, 0]);
     }
+
+    #[test]
+    fn page_of_nulls() {
+        let data = vec![];
+
+        let num_bits = 1;
+
+        let decoder = HybridRleDecoder::new(&data, num_bits as u32, 2);
+
+        let result = decoder.collect::<Vec<_>>();
+    }
 }
